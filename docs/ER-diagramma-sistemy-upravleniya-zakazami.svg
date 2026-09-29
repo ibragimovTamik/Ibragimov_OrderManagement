@@ -1,0 +1,117 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1000" viewBox="0 0 1600 1000">
+  <rect width="1600" height="1000" fill="#ffffff"/>
+  <style>
+    .title { font: 700 30px Arial, sans-serif; fill: #111827; }
+    .head { font: 700 19px Arial, sans-serif; fill: #ffffff; }
+    .body { font: 16px Arial, sans-serif; fill: #1f2937; }
+    .card { fill: #f2f4f7; stroke: #3d4d60; stroke-width: 2; }
+    .header { fill: #3d4d60; }
+    .rel { fill: none; stroke: #4b5563; stroke-width: 3; stroke-linejoin: round; stroke-linecap: square; }
+    .cardinality { font: 700 16px Arial, sans-serif; fill: #111827; paint-order: stroke; stroke: #ffffff; stroke-width: 7; stroke-linejoin: round; }
+  </style>
+
+  <text x="60" y="48" class="title">ER-диаграмма системы управления заказами</text>
+
+  <!-- Relationships routed behind the entity cards -->
+  <!-- Клиенты 1:N Заказы -->
+  <path class="rel" d="M320 230 H440"/>
+  <text x="365" y="215" class="cardinality">1:N</text>
+  <!-- Заказы 1:N Состав заказа -->
+  <path class="rel" d="M700 230 H820"/>
+  <text x="745" y="215" class="cardinality">1:N</text>
+  <!-- Состав заказа N:1 Товары -->
+  <path class="rel" d="M1080 230 H1200"/>
+  <text x="1120" y="215" class="cardinality">N:1</text>
+  <!-- Категории 1:N Товары, outer top rail -->
+  <path class="rel" d="M60 590 H20 V85 H1330 V160"/>
+  <text x="755" y="73" class="cardinality">1:N</text>
+  <!-- Заказы 1:1 Оплата -->
+  <path class="rel" d="M570 300 V520"/>
+  <text x="585" y="420" class="cardinality">1:1</text>
+  <!-- Заказы 1:1 Доставка -->
+  <path class="rel" d="M640 300 V400 H950 V520"/>
+  <text x="780" y="385" class="cardinality">1:1</text>
+  <!-- Склады 1:N Остатки -->
+  <path class="rel" d="M1330 660 V820"/>
+  <text x="1348" y="750" class="cardinality">1:N</text>
+  <!-- Товары 1:N Остатки, right rail -->
+  <path class="rel" d="M1460 300 V760 H1330 V820"/>
+  <text x="1475" y="700" class="cardinality">1:N</text>
+  <!-- Сотрудники 1:N Заказы, outer left rail -->
+  <path class="rel" d="M440 890 H400 V105 H570 V160"/>
+  <text x="355" y="125" class="cardinality">1:N</text>
+
+  <!-- Entity cards -->
+  <g>
+    <rect x="60" y="160" width="260" height="140" rx="8" class="card"/>
+    <rect x="60" y="160" width="260" height="36" rx="8" class="header"/>
+    <rect x="60" y="188" width="260" height="8" class="header"/>
+    <text x="78" y="185" class="head">Клиенты</text>
+    <text x="78" y="226" class="body">id</text><text x="78" y="252" class="body">ФИО, email, телефон</text>
+  </g>
+  <g>
+    <rect x="440" y="160" width="260" height="140" rx="8" class="card"/>
+    <rect x="440" y="160" width="260" height="36" rx="8" class="header"/>
+    <rect x="440" y="188" width="260" height="8" class="header"/>
+    <text x="458" y="185" class="head">Заказы</text>
+    <text x="458" y="226" class="body">id</text><text x="458" y="252" class="body">дата, статус, сумма</text>
+  </g>
+  <g>
+    <rect x="820" y="160" width="260" height="140" rx="8" class="card"/>
+    <rect x="820" y="160" width="260" height="36" rx="8" class="header"/>
+    <rect x="820" y="188" width="260" height="8" class="header"/>
+    <text x="838" y="185" class="head">Состав заказа</text>
+    <text x="838" y="226" class="body">id</text><text x="838" y="252" class="body">количество, цена</text>
+  </g>
+  <g>
+    <rect x="1200" y="160" width="260" height="140" rx="8" class="card"/>
+    <rect x="1200" y="160" width="260" height="36" rx="8" class="header"/>
+    <rect x="1200" y="188" width="260" height="8" class="header"/>
+    <text x="1218" y="185" class="head">Товары</text>
+    <text x="1218" y="226" class="body">id</text><text x="1218" y="252" class="body">название, цена</text>
+  </g>
+
+  <g>
+    <rect x="60" y="520" width="260" height="140" rx="8" class="card"/>
+    <rect x="60" y="520" width="260" height="36" rx="8" class="header"/>
+    <rect x="60" y="548" width="260" height="8" class="header"/>
+    <text x="78" y="545" class="head">Категории</text>
+    <text x="78" y="586" class="body">id</text><text x="78" y="612" class="body">название</text>
+  </g>
+  <g>
+    <rect x="440" y="520" width="260" height="140" rx="8" class="card"/>
+    <rect x="440" y="520" width="260" height="36" rx="8" class="header"/>
+    <rect x="440" y="548" width="260" height="8" class="header"/>
+    <text x="458" y="545" class="head">Оплата</text>
+    <text x="458" y="586" class="body">id</text><text x="458" y="612" class="body">способ, статус</text>
+  </g>
+  <g>
+    <rect x="820" y="520" width="260" height="140" rx="8" class="card"/>
+    <rect x="820" y="520" width="260" height="36" rx="8" class="header"/>
+    <rect x="820" y="548" width="260" height="8" class="header"/>
+    <text x="838" y="545" class="head">Доставка</text>
+    <text x="838" y="586" class="body">id</text><text x="838" y="612" class="body">адрес, статус</text>
+  </g>
+  <g>
+    <rect x="1200" y="520" width="260" height="140" rx="8" class="card"/>
+    <rect x="1200" y="520" width="260" height="36" rx="8" class="header"/>
+    <rect x="1200" y="548" width="260" height="8" class="header"/>
+    <text x="1218" y="545" class="head">Склады</text>
+    <text x="1218" y="586" class="body">id</text><text x="1218" y="612" class="body">название, адрес</text>
+  </g>
+
+  <g>
+    <rect x="440" y="820" width="260" height="140" rx="8" class="card"/>
+    <rect x="440" y="820" width="260" height="36" rx="8" class="header"/>
+    <rect x="440" y="848" width="260" height="8" class="header"/>
+    <text x="458" y="845" class="head">Сотрудники</text>
+    <text x="458" y="886" class="body">id</text><text x="458" y="912" class="body">ФИО, должность</text>
+  </g>
+  <g>
+    <rect x="1200" y="820" width="260" height="140" rx="8" class="card"/>
+    <rect x="1200" y="820" width="260" height="36" rx="8" class="header"/>
+    <rect x="1200" y="848" width="260" height="8" class="header"/>
+    <text x="1218" y="845" class="head">Остатки</text>
+    <text x="1218" y="886" class="body">id</text><text x="1218" y="912" class="body">количество</text>
+  </g>
+</svg>
