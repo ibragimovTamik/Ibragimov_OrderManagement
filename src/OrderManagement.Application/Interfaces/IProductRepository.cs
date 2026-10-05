@@ -2,7 +2,10 @@ using OrderManagement.Domain.Entities;
 
 namespace OrderManagement.Application.Interfaces;
 
-public interface IProductRepository
+public interface IProductRepository : IRepository<Product>
 {
-    Task<Product?> GetByIdAsync(Guid id, CancellationToken cancellationToken);
+    Task<IReadOnlyCollection<Product>> GetByPriceRangeAsync(
+        decimal minimum,
+        decimal maximum,
+        CancellationToken cancellationToken);
 }

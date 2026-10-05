@@ -5,8 +5,21 @@ using OrderManagement.Infrastructure.Data;
 
 namespace OrderManagement.Infrastructure.Repositories;
 
-public sealed class ProductRepository(OrderManagementDbContext dbContext) : IProductRepository
+public sealed class ProductRepository : GenericRepository<Product>, IProductRepository
 {
-    public Task<Product?> GetByIdAsync(Guid id, CancellationToken cancellationToken) =>
-        dbContext.Products.FirstOrDefaultAsync(x => x.Id == id, cancellationToken);
+    private readonly OrderManagementDbContext dbContext;
+
+    public ProductRepository(OrderManagementDbContext dbContext) : base(dbContext)
+    {
+        this.dbContext = dbContext;
+    }
+
+    public async Task<IReadOnlyCollection<Product>> GetByPriceRangeAsync(
+        decimal minimum,
+        decimal maximum,
+        CancellationToken cancellationToken) =>
+        await dbContext.Products
+            .AsNoTracking()
+            .Where(x => x.Price >= minimum && x.Price <= maximum)
+            .ToArrayAsync(cancellationToken);
 }

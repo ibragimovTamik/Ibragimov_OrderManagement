@@ -16,6 +16,7 @@ public sealed class OrderManagementDbContext(DbContextOptions<OrderManagementDbC
     public DbSet<Warehouse> Warehouses => Set<Warehouse>();
     public DbSet<Inventory> Inventory => Set<Inventory>();
     public DbSet<Employee> Employees => Set<Employee>();
+    public DbSet<User> Users => Set<User>();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -42,5 +43,10 @@ public sealed class OrderManagementDbContext(DbContextOptions<OrderManagementDbC
         modelBuilder.Entity<Warehouse>().HasMany(x => x.Inventory).WithOne(x => x.Warehouse).HasForeignKey(x => x.WarehouseId);
         modelBuilder.Entity<Inventory>().HasKey(x => x.Id);
         modelBuilder.Entity<Inventory>().HasOne(x => x.Product).WithMany(x => x.Inventory).HasForeignKey(x => x.ProductId);
+
+        modelBuilder.Entity<User>().HasKey(x => x.Id);
+        modelBuilder.Entity<User>().Property(x => x.Login).HasMaxLength(100).IsRequired();
+        modelBuilder.Entity<User>().Property(x => x.PassHash).HasMaxLength(500).IsRequired();
+        modelBuilder.Entity<User>().HasIndex(x => x.Login).IsUnique();
     }
 }

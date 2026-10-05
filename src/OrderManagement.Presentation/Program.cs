@@ -28,13 +28,16 @@ builder.Services.AddDbContext<OrderManagementDbContext>(options =>
 builder.Services.AddScoped<IOrderRepository, OrderRepository>();
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
 builder.Services.AddScoped<IOrderService, OrderService>();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
 var app = builder.Build();
 
 using (var scope = app.Services.CreateScope())
 {
     var db = scope.ServiceProvider.GetRequiredService<OrderManagementDbContext>();
-    db.Database.EnsureCreated();
+    DatabaseInitializer.Initialize(db);
     DatabaseSeeder.Seed(db);
 }
 
